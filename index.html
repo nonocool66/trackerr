@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dark Sigma Trace – Surveillance</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      margin:0;
+      font-family: monospace;
+      background: black;
+      color: #00ff9d;
+      overflow-x:hidden;
+    }
+    .wrap {
+      padding: 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+    h1 {
+      color: #ff0055;
+      text-align: center;
+      text-shadow: 0 0 8px #ff0055;
+    }
+    .panel {
+      background: rgba(0,255,150,0.05);
+      border: 1px solid #00ff9d;
+      padding: 16px;
+      margin: 14px 0;
+      border-radius: 8px;
+      box-shadow: 0 0 20px rgba(0,255,157,0.3);
+      animation: fadeIn 1.2s ease;
+    }
+    .log {
+      background: rgba(0,0,0,0.7);
+      border:1px solid #00ff9d;
+      border-radius: 6px;
+      padding: 10px;
+      height:200px;
+      overflow:auto;
+      font-size:14px;
+    }
+    .line { opacity:0; animation: appear 0.5s forwards; }
+    @keyframes appear { to{opacity:1;} }
+    @keyframes fadeIn { from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:translateY(0);} }
+    .alert {
+      color:#ff0055;
+      font-weight:bold;
+      text-shadow:0 0 6px #ff3366;
+      text-align:center;
+      margin-top:20px;
+    }
+    .btn {
+      display:inline-block;
+      background:#ff0055;
+      color:white;
+      padding:10px 16px;
+      border-radius:6px;
+      margin-top:14px;
+      text-decoration:none;
+      cursor:pointer;
+      transition: background 0.2s;
+    }
+    .btn:hover { background:#d40047; }
+    .pfp {
+      display:block;
+      margin: 0 auto 12px auto;
+      width:120px;
+      height:120px;
+      border-radius:50%;
+      border:2px solid #00ff9d;
+      box-shadow:0 0 12px #00ff9d;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>📡 Surveillance en cours…</h1>
+    <div class="panel" style="text-align:center">
+      <img src="https://yt3.googleusercontent.com/ytc/AGIKgqO5XrFQKQz0w0iPjbdZsXGv1gJmnvTz-6jJwFxY=s176-c-k-c0x00ffffff-no-rj" alt="Photo de profil" class="pfp" />
+      <p><b>Cible :</b> @nonocool4941 (alias NonoCool66)</p>
+      <p><b>Suivi depuis :</b> 5 oct. 2022</p>
+      <p><b>Traceur identifié :</b> Dark Sigma</p>
+    </div>
+
+    <div class="panel">
+      <h2>📊 Statistiques YouTube (réelles)</h2>
+      <ul>
+        <li><b>Abonnés :</b> 36</li>
+        <li><b>Total vues :</b> 871</li>
+        <li><b>Vidéos publiées :</b> 26</li>
+        <li><b>Date création :</b> 5 octobre 2022</li>
+        <li><b>Audience principale :</b> France, 72%</li>
+        <li><b>Heure d'activité fréquente :</b> 21h17</li>
+      </ul>
+      <canvas id="statsChart"></canvas>
+    </div>
+
+    <div class="panel">
+      <h2>📜 Journal de surveillance</h2>
+      <div class="log" id="log"></div>
+    </div>
+  </div>
+
+<script>
+  // Journal dynamique
+  const log = document.getElementById('log');
+  const lines = [
+    "Initialisation du suivi de la cible…",
+    "Connexion aux serveurs sécurisés…",
+    "Extraction des métadonnées publiques de NonoCool66…",
+    "Analyse de la fréquence des uploads…",
+    "Corrélation avec les heures d'activité : 21h17",
+    "Origine géographique majoritaire : France (72%)",
+    "Anomalie détectée : croissance irrégulière des vues",
+    "Mise à jour du tableau de stats…"
+  ];
+
+  let i=0;
+  function addLine(){
+    if(i>=lines.length) return;
+    const div=document.createElement('div');
+    div.textContent = `[${new Date().toLocaleTimeString()}] ${lines[i]}`;
+    div.className='line';
+    div.style.animationDelay = (i*0.8)+'s';
+    log.appendChild(div);
+    log.scrollTop=log.scrollHeight;
+    i++;
+    setTimeout(addLine,800);
+  }
+  addLine();
+
+  // Graphique interactif amélioré
+  const ctx = document.getElementById('statsChart').getContext('2d');
+
+  // Dégradés futuristes
+  const gradient1 = ctx.createLinearGradient(0,0,0,200);
+  gradient1.addColorStop(0, '#ff0055');
+  gradient1.addColorStop(1, '#660022');
+
+  const gradient2 = ctx.createLinearGradient(0,0,0,200);
+  gradient2.addColorStop(0, '#00ff9d');
+  gradient2.addColorStop(1, '#006644');
+
+  const gradient3 = ctx.createLinearGradient(0,0,0,200);
+  gradient3.addColorStop(0, '#0099ff');
+  gradient3.addColorStop(1, '#003366');
+
+  const statsChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Abonnés', 'Vues', 'Vidéos'],
+      datasets: [{
+        label: 'Statistiques de la chaîne',
+        data: [36, 871, 26],
+        backgroundColor: [gradient1, gradient2, gradient3],
+        borderRadius: 8, // coins arrondis
+        borderWidth: 1,
+        borderColor: '#00ff9d',
+      }]
+    },
+    options: {
+      responsive:true,
+      animation: {
+        duration: 1500,
+        easing: 'easeOutQuart'
+      },
+      plugins:{
+        legend:{
+          labels:{color:'#00ff9d'}
+        },
+        tooltip:{
+          backgroundColor: 'rgba(0,0,0,0.8)',
+          titleColor: '#ff0055',
+          bodyColor: '#00ff9d',
+          borderColor: '#00ff9d',
+          borderWidth: 1
+        }
+      },
+      scales:{
+        x:{ticks:{color:'#00ff9d'}},
+        y:{
+          ticks:{color:'#00ff9d'},
+          grid:{color:'rgba(0,255,157,0.2)'}
+        }
+      }
+    }
+  });
+</script>
+</body>
+</html>
