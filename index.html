@@ -64,13 +64,14 @@
     }
     .btn:hover { background:#d40047; }
     .pfp {
-      display:block;
+      display: block;
       margin: 0 auto 12px auto;
-      width:120px;
-      height:120px;
-      border-radius:50%;
-      border:2px solid #00ff9d;
-      box-shadow:0 0 12px #00ff9d;
+      width: 200px;         /* Taille ajustable */
+      height: 200px;        /* Même valeur que width pour le cercle */
+      border-radius: 50%;
+      border: 2px solid #00ff9d;
+      box-shadow: 0 0 12px #00ff9d;
+      object-fit: cover;     /* Remplit le cercle sans déformation */
     }
   </style>
 </head>
@@ -155,7 +156,7 @@
         label: 'Statistiques de la chaîne',
         data: [36, 871, 26],
         backgroundColor: [gradient1, gradient2, gradient3],
-        borderRadius: 8, // coins arrondis
+        borderRadius: 8,
         borderWidth: 1,
         borderColor: '#00ff9d',
       }]
